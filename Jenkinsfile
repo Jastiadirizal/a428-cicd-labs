@@ -7,5 +7,12 @@ node {
         stage('Test') { 
         sh './jenkins/scripts/test.sh' 
         }
+         stage('Manual Approve') {
+            input message: 'Lanjutkan ke tahap deploy? (klik "process" untuk mendeploy)'
+        }
+        stage('Deploy') {
+            sh './jenkins/scripts/deliver.sh'
+            sleep(time: 60, unit: 'SECONDS')
+        }
     }
 }
